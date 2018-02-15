@@ -8,12 +8,12 @@
 int main() {
   // This is a fixed number for the sake of this program. Not very nice, but
   // easier to program for now.
-  double const mu = 1.0;
+  double const mu = 1.5;
 
   double const size_L = 16;
   double const size_T = 32;
 
-  int const update_n = 100;
+  int const update_n = 1000;
   double const update_sd = 2.0;
 
   Lattice lattice(size_L, size_T);
@@ -25,7 +25,7 @@ int main() {
   std::normal_distribution<double> dist_phi(0, update_sd);
 
   std::ofstream ofs_corr("corr.txt");
-  ofs_corr << "\"size_L\"\t\"size_T\"\t\"mu\"\t\"update\"\t\"t\"\t\"corr\"\n";
+  //ofs_corr << "\"size_L\"\t\"size_T\"\t\"mu\"\t\"update\"\t\"t\"\t\"corr\"\n";
 
   // Full sweep loop.
   for (int n = 0; n < update_n; ++n) {
@@ -52,8 +52,10 @@ int main() {
     auto const &corr = measure_corr(lattice);
 
     for (int t = 0; t < corr.size(); ++t) {
-      ofs_corr << size_L << "\t" << size_T << "\t" << mu << "\t" << n << "\t"
-               << t << "\t" << corr[t] << "\n";
+      // ofs_corr << size_L << "\t" << size_T << "\t" << mu << "\t" << n <<
+      // "\t" << t << "\t" << corr[t] << "\n";
+
+      ofs_corr << corr[t] << "\t 0.0\n";
     }
   }
 }
