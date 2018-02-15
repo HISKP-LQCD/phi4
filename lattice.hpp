@@ -2,6 +2,8 @@
 
 #include <vector>
 #include <array>
+#include <cassert>
+#include <iostream>
 
 /**
   Fast modulo function that just wraps once.
@@ -28,6 +30,16 @@ public:
     auto const z2 = fastmod(z, size_L_);
     auto const t2 = fastmod(t, size_T_);
 
+    assert(0 <= x2);
+    assert(0 <= y2);
+    assert(0 <= z2);
+    assert(0 <= t2);
+
+    assert(x2 < size_L_);
+    assert(y2 < size_L_);
+    assert(z2 < size_L_);
+    assert(t2 < size_T_);
+
     return data_[((x2 * size_L_ + y2) * size_L_ + z2) * size_T_ + t2];
   }
 
@@ -37,6 +49,16 @@ public:
     auto const y2 = fastmod(y, size_L_);
     auto const z2 = fastmod(z, size_L_);
     auto const t2 = fastmod(t, size_T_);
+
+    assert(0 <= x2);
+    assert(0 <= y2);
+    assert(0 <= z2);
+    assert(0 <= t2);
+
+    assert(x2 < size_L_);
+    assert(y2 < size_L_);
+    assert(z2 < size_L_);
+    assert(t2 < size_T_);
 
     return data_[((x2 * size_L_ + y2) * size_L_ + z2) * size_T_ + t2];
   }
@@ -53,7 +75,7 @@ public:
   int size_T() const { return size_T_; }
 
 private:
-  int size_L_;
-  int size_T_;
+  int const size_L_;
+  int const size_T_;
   std::vector<Data> data_;
 };
